@@ -1,0 +1,27 @@
+{
+  "name": "nodejs_study",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "task1_1": "nodemon babel-node task1/task1_1.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ljakseihc/nodejs.git"
+  },
+  "author": "Ljakseihc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ljakseihc/nodejs/issues"
+  },
+  "homepage": "https://github.com/Ljakseihc/nodejs#readme",
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/node": "^7.15.4",
+    "nodemon": "^2.0.13"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "description": ""
+}
