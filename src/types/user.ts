@@ -6,3 +6,4 @@ export type User = {
     isDeleted: boolean;
     createdAt: string;
   }
+  

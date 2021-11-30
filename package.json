@@ -36,15 +36,21 @@
     "husky": "^7.0.2",
     "nodemon": "^2.0.14",
     "rimraf": "^3.0.2",
+    "sequelize-cli": "^6.3.0",
+    "sequelize-typescript-migration": "^0.0.1-beta.3",
     "ts-node": "^10.3.0",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.4.4"
   },
   "dependencies": {
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "helmet": "^4.6.0",
     "express-joi-validation": "^5.0.0",
+    "helmet": "^4.6.0",
     "joi": "^17.4.2",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.11.0",
     "uuid": "^8.3.2"
   },
   "description": "Node js Global mentory project"
