@@ -31,8 +31,8 @@ export class UsersService {
   }
 
   async deleteUser(userId: UserId): Promise<UserId| undefined> {
-    const isRemoved = await usersRepository.deleteUser(userId)
-    if (isRemoved) {
+    const isDeleted = await usersRepository.deleteUser(userId)
+    if (isDeleted) {
       return userId
     }
   }

@@ -11,8 +11,8 @@ class UserController {
     getUserById = async (req: Request, res: Response) => {
         try {
             const { id } = req.params
-            const userById = await usersService.getUserById(id)
-            return res.status(400).json(userById)
+            const user = await usersService.getUserById(id)
+            return res.status(400).json(user)
         } catch (error) {
             return res.status(500).json({ error: 'Internal server error' })
         }
@@ -20,8 +20,8 @@ class UserController {
 
     getUserList = async (req: Request, res: Response) => {
         try {
-            const usersList = await usersService.getUserList()
-            return res.json(usersList)
+            const users = await usersService.getUserList()
+            return res.json(users)
         } catch (error) {
             return res.status(500).json({ error: 'Internal server error' })
         }
@@ -39,9 +39,9 @@ class UserController {
     updateUser = async (req: ValidatedRequest<UserRequestSchema>, res: Response) => {
         try {
             const { id } = req.params
-            const userExists = await usersService.updateUser(id, req.body);
+            const userId = await usersService.updateUser(id, req.body);
 
-            if (userExists) return res.json({ message: 'User has been updated' })
+            if (userId) return res.json({ message: 'User has been updated' })
             return res.status(400).json({ error: 'User has not been found in db' })
         } catch (error) {
             return res.status(500).json({ error: 'Internal server error' })
@@ -52,8 +52,8 @@ class UserController {
     deleteUser = async (req: Request, res: Response) => {
         try {
             const { id } = req.params;
-            const userExists = await usersService.deleteUser(id)
-            if (userExists) return res.json({ message: 'User has been deleted' })
+            const userId = await usersService.deleteUser(id)
+            if (userId) return res.json({ message: 'User has been deleted' })
             return res.status(400).json({ error: 'User has not been found in db' })
         } catch (error) {
             return res.status(500).json({ error: 'Internal server error' })
