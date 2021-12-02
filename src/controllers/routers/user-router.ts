@@ -1,6 +1,6 @@
 import express from 'express'
-import UserController from '../controllers/user-controller'
-import { validator, schema } from '../utils/validator'
+import UserController from '../user-controller'
+import { validator, schema } from '../../utils/validator'
 
 const router = express.Router()
 
