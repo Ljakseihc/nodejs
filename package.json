@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts",
+    "dev": "ts-node-dev --transpile-only src/index.ts",
     "task1_1": "nodemon babel-node task1/task1_1.js"
   },
   "repository": {
