@@ -1,5 +1,7 @@
-import { DataTypes, Model } from "sequelize"
+import Sequelize, { DataTypes, Model } from "sequelize"
 import { UserInterface, UserId, UserInput } from "../../model/user-model"
+import { Group } from "./group-table";
+import { GroupId } from '../../model/group-model'
 import sequelize from "../../config/sequlize"
 
 class User extends Model<UserInterface, UserInput> implements UserInterface {
@@ -9,6 +11,11 @@ class User extends Model<UserInterface, UserInput> implements UserInterface {
   age!: number;
   isDeleted!: boolean;
   createdAt!: Date
+  static associate(models: any) {
+    User.belongsToMany(models.Group, {
+      through: 'UserGroups',
+    })
+  }
 }
 
 User.init(

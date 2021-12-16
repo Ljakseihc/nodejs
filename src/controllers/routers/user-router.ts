@@ -2,12 +2,12 @@ import express from 'express'
 import UserController from '../user-controller'
 import { validator, schema } from '../../utils/validator'
 
-const router = express.Router()
+const userRouter = express.Router()
 
-router.get('/user', UserController.getUserList)
-router.get('/user/:id', UserController.getUserById)
-router.post('/user', validator.body(schema), UserController.addUser)
-router.put('/user/:id', validator.body(schema), UserController.updateUser)
-router.delete('/user/:id', UserController.deleteUser)
+userRouter.get('/user', UserController.getUserList)
+userRouter.get('/user/:id', UserController.getUserById)
+userRouter.post('/user', validator.body(schema), UserController.addUser)
+userRouter.put('/user/:id', validator.body(schema), UserController.updateUser)
+userRouter.delete('/user/:id', UserController.deleteUser)
 
-export default router
+export default userRouter
