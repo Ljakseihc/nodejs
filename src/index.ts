@@ -23,7 +23,7 @@ server.listen(PORT, async () => {
     .catch((error) => {
       console.error("Unable to connect to the database:", error);
     })
-
+  
   await createEntities()
   console.log(`Go to http://localhost:${PORT}`)
 })
