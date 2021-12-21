@@ -8,56 +8,35 @@ class GroupRepository {
     }
 
     async getGroupById(id: GroupId): Promise<GroupOutput | undefined> {
-        try {
-            const group = await Group.findByPk(id)
-            if (group) {
-                return group
-            }
-        } catch (error) {
-            console.log(error)
+        const group = await Group.findByPk(id)
+        if (group) {
+            return group
         }
     }
 
     async removeGroup(id: GroupId): Promise<boolean | undefined> {
-        try {
-            const destroyCount = await Group.destroy({ where: { id }, force: true })
-            return !!destroyCount
-        } catch (error) {
-            console.log(error)
-        }
+        const destroyCount = await Group.destroy({ where: { id }, force: true })
+        return !!destroyCount
     }
 
     async updateGroup(id: GroupId, groupInput: GroupInput): Promise<Group | undefined> {
-        try {
-            const group = await Group.findByPk(id)
-            if (group) {
-                await group.update({ ...groupInput })
-                return group
-            }
-        } catch (error) {
-            console.log(error)
+        const group = await Group.findByPk(id)
+        if (group) {
+            await group.update({ ...groupInput })
+            return group
         }
     }
 
     async isGroupExist(name: string): Promise<boolean | undefined> {
-        try {
-            const group = await Group.findOne({
-                where: { name },
-            })
+        const group = await Group.findOne({
+            where: { name },
+        })
 
-            return !!group
-        } catch (error) {
-            console.log(error)
-        }
+        return !!group
     }
 
     async createGroup(groupInput: GroupInput): Promise<Group | undefined> {
-        try {
-            const group = Group.create({ ...groupInput })
-            return group
-        } catch (error) {
-            console.log(error)
-        }
+        return Group.create({ ...groupInput })
     }
 }
 

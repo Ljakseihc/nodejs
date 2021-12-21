@@ -4,6 +4,7 @@ import userRouter from './controllers/routers/user-router'
 import sequelize from './config/sequlize'
 import { initDataBase, createEntities } from './data-access/init'
 import groupRouter from './controllers/routers/group-routes'
+import errorHandler from './logger/error-handler'
 
 const PORT = 8080
 const server = express()
@@ -13,6 +14,7 @@ server.use(express.json({ limit: '300kb' }))
 server.use(express.urlencoded({ limit: '300kb', extended: true }))
 server.use(userRouter);
 server.use(groupRouter)
+server.use(errorHandler)
 
 server.listen(PORT, async () => {
   await sequelize.sync()
