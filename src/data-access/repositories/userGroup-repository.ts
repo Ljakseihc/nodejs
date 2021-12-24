@@ -1,13 +1,12 @@
 import sequelize from "../../config/sequlize"
 import { UserGroup } from '../tables/userGroup-tables'
 import { UserGroupRequestBodyType } from "../../model/userGroup-model"
+import logger from "../../logger/logger"
 
 class UserGroupRepository {
 
     public async addUsersToGroup({ groupId, userIds }: UserGroupRequestBodyType) {
-        console.log("11111111111111111")
         const transaction = await sequelize.transaction()
-        console.log("22222222222222222")
         try {
             for (const id of userIds) {
                 console.log(id)
@@ -18,8 +17,9 @@ class UserGroupRepository {
             }
             await transaction.commit()
         } catch (error) {
-            console.log(error)
+            logger.error(error)
             await transaction.rollback()
+            throw error
         }
     }
 }

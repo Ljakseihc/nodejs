@@ -1,62 +1,67 @@
-import { Request, Response } from 'express'
-import { ValidatedRequest } from 'express-joi-validation'
-import { UserRequestSchema } from '../utils/validator'
+import { NextFunction, Request, Response } from 'express'
 import { UsersService } from '../services/user-service'
 import { User } from '../data-access/tables/user-table'
+import { NotFoundError } from '../logger/error'
+import logger from '../logger/logger'
 
 const usersService = new UsersService(User)
 
 class UserController {
 
-    getUserById = async (req: Request, res: Response) => {
+    getUserById = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const { id } = req.params
             const user = await usersService.getUserById(id)
-            return res.status(400).json(user)
+            if (!user) throw new NotFoundError()
+            return res.json(user)
         } catch (error) {
-            return res.status(500).json({ error: 'Internal server error' })
+            logger.error(error)
+            return next(error)
         }
     }
 
-    getUserList = async (req: Request, res: Response) => {
+    getUserList = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const users = await usersService.getUserList()
             return res.json(users)
         } catch (error) {
-            return res.status(500).json({ error: 'Internal server error' })
+            logger.error(error)
+            return next(error)
         }
     }
 
-    addUser = async (req: ValidatedRequest<UserRequestSchema>, res: Response) => {
+    addUser = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const newUser = await usersService.addUser(req.body)
             return res.json(newUser)
         } catch (error) {
-            return res.status(500).json({ error: 'Internal server error' })
+            logger.error(error)
+            return next(error)
         }
     }
 
-    updateUser = async (req: ValidatedRequest<UserRequestSchema>, res: Response) => {
+    updateUser = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const { id } = req.params
             const userId = await usersService.updateUser(id, req.body);
-
-            if (userId) return res.json({ message: 'User has been updated' })
-            return res.status(400).json({ error: 'User has not been found in db' })
+            if (!userId) throw new NotFoundError()
+            return res.json({ message: 'User has been updated' })
         } catch (error) {
-            return res.status(500).json({ error: 'Internal server error' })
+            logger.error(error)
+            return next(error)
         }
     }
 
 
-    deleteUser = async (req: Request, res: Response) => {
+    deleteUser = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const { id } = req.params;
             const userId = await usersService.deleteUser(id)
-            if (userId) return res.json({ message: 'User has been deleted' })
-            return res.status(400).json({ error: 'User has not been found in db' })
+            if (!userId) throw new NotFoundError()
+            return res.json({ message: 'User has been deleted' })
         } catch (error) {
-            return res.status(500).json({ error: 'Internal server error' })
+            logger.error(error)
+            return next(error)
         }
     }
 
