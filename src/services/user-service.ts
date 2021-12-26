@@ -43,4 +43,11 @@ export class UsersService {
       return updatedUser
     }
   }
+
+  async getUserByLogin(login: string): Promise<UserOutput| undefined> {
+    const user = await usersRepository.getUserByLogin(login)
+    if (user) {
+      return user
+    }
+  }
 }

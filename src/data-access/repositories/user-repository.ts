@@ -41,6 +41,15 @@ class UsersRepository {
     })
     return !!user
   }
+
+  async getUserByLogin(login: string): Promise<UserOutput | undefined> {
+    const user = await User.findOne({
+      where: { login },
+    })
+    if (user) {
+      return user;
+    }
+  }
 }
 
 export const usersRepository = new UsersRepository()
