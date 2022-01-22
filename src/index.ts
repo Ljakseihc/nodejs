@@ -42,6 +42,4 @@ server.listen(PORT, async () => {
   console.log(`Go to http://localhost:${PORT}`)
 })
 
-
-
-
+export default server
